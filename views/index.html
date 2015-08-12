@@ -17,6 +17,8 @@
                     <td>QTY</td>
                     <td>Total(THB)</td>
                     <td />
+                    <td />
+                    <td />
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +37,12 @@
                     </td>
                     <td>
                         <button class="btn btn-primary" ng-click="addItem()">Add</button>
+                    </td>
+                    <td>
                         <button class="btn btn-info" ng-click="updateItem()">Update</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-success" ng-click="clearItem()">Clear</button>
                     </td>
                 </tr>
                 <tr ng-repeat = "item in itemList">
@@ -53,8 +60,11 @@
                     </td>
                     <td>
                         <button class="btn btn-danger" ng-click="deleteItem(item._id)">Delete</button>
+                    </td>
+                    <td>
                         <button class="btn btn-warning" ng-click="selectItem(item._id)">Select</button>
                     </td>
+                    <td/>
                 </tr>
             </tbody>
         </table>

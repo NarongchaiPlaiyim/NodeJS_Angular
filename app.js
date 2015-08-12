@@ -35,25 +35,18 @@ app.get("/itemList/:id", function (req, res) {
 
 app.put("/itemList/:id", function (req, res) {
     var id = req.params.id;
+    console.log('update : ');
     console.log('update : '+id);
     console.log('update : '+req.body.name);
     console.log('update : '+req.body.price);
     console.log('update : '+req.body.qty);
+    db.itemList.findAndModify({query: {_id: mongoJs.ObjectId(id)}, update: {$set: {name:req.body.name,
+                                                                                   price:req.body.price,
+                                                                                   qty:req.body.qty}}, new: true},
+        function (err, docs) {
+            res.json(docs);
+        });
 });
 
 app.listen(1337, '127.0.0.1');
 console.log('Server running at http://127.0.0.1:1337/');
-
-//app.get('/', function(req, res){
-//        res.send("Hello app.js");
-//    }
-//).listen(1337, '127.0.0.1');
-//console.log('Server running at http://127.0.0.1:1337/');
-
-
-/*var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');*/

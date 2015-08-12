@@ -28,9 +28,15 @@ angular.module('mainApp', [])
 
 
         $scope.updateItem = function(){
-            console.log('updateItem : ');
-            $http.get('/itemList/'+$scope.item._id, $scope.item).success(function(response){
+            console.log('updateItem : '+$scope.item._id);
+            console.log('updateItem : '+$scope.item);
+            $http.put('/itemList/'+$scope.item._id, $scope.item).success(function(response){
                 refresh();
             })
         };
+
+        $scope.clearItem = function(){
+            $scope.item = "";
+        };
+
 });
