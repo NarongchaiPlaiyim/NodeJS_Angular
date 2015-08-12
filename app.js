@@ -1,35 +1,44 @@
 var express = require('express');
+var mongoJs = require('mongojs');
+var bodyParser = require('body-parser');
+
 var app = express();
-//var monogoose = require('monogoose');
-//mongoose.connect('mongodb://127.0.0.1/admin');
-
-var mongojs = require('mongojs');
-var db = mongojs('127.0.0.1/admin', ['itemList']);
-
+var db = mongoJs('127.0.0.1/admin', ['itemList']);
 app.use(express.static(__dirname + "/views"));
-app.get("/itemList", function (req, res) {
+app.use(bodyParser.json());
 
+app.get("/itemList", function (req, res) {
     db.itemList.find(function (err, docs) {
-        console.log(docs);
-        res.jsonp(docs);
+        res.json(docs);
     });
-    //item = {
-    //    name : 'item',
-    //    price : '100',
-    //    qty : '10'
-    //};
-    //item2 = {
-    //    name : 'item2',
-    //    price : '200',
-    //    qty : '20'
-    //};
-    //item3 = {
-    //    name : 'item3',
-    //    price : '300',
-    //    qty : '30'
-    //};
-    //var itemList = [item, item2, item3];
-    //res.jsonp(itemList);
+});
+
+app.post("/itemList", function (req, res) {
+    db.itemList.insert(req.body, function (err, docs) {
+        res.json(docs);
+    });
+});
+
+app.delete("/itemList/:id", function (req, res) {
+    var id = req.params.id;
+    db.itemList.remove({_id: mongoJs.ObjectId(id)}, function (err, docs) {
+        res.json(docs);
+    });
+});
+
+app.get("/itemList/:id", function (req, res) {
+    var id = req.params.id;
+    db.itemList.findOne({_id: mongoJs.ObjectId(id)}, function (err, docs) {
+        res.json(docs);
+    });
+});
+
+app.put("/itemList/:id", function (req, res) {
+    var id = req.params.id;
+    console.log('update : '+id);
+    console.log('update : '+req.body.name);
+    console.log('update : '+req.body.price);
+    console.log('update : '+req.body.qty);
 });
 
 app.listen(1337, '127.0.0.1');

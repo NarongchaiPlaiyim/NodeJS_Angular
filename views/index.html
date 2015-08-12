@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html ng-app = "mainApp">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="angular/angular.min.js"></script>
     <script src="controller/mainController.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -15,13 +15,46 @@
                     <td>Name</td>
                     <td>Price</td>
                     <td>QTY</td>
+                    <td>Total(THB)</td>
+                    <td />
                 </tr>
             </thead>
             <tbody>
+                <tr >
+                    <td>
+                        <input type="text" ng-model="item.name" placeholder="Enter a name here"/>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="item.price" placeholder="Enter a price here"/>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="item.qty" placeholder="Enter a qty here"/>
+                    </td>
+                    <td>
+                        {{item.price * item.qty}}
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" ng-click="addItem()">Add</button>
+                        <button class="btn btn-info" ng-click="updateItem()">Update</button>
+                    </td>
+                </tr>
                 <tr ng-repeat = "item in itemList">
-                    <td>{{item.name}}</td>
-                    <td>{{item.price}}</td>
-                    <td>{{item.qty}}</td>
+                    <td>
+                        {{item.name}}
+                    </td>
+                    <td>
+                        {{item.price}}
+                    </td>
+                    <td>
+                        {{item.qty}}
+                    </td>
+                    <td>
+                        {{item.price * item.qty}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" ng-click="deleteItem(item._id)">Delete</button>
+                        <button class="btn btn-warning" ng-click="selectItem(item._id)">Select</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
