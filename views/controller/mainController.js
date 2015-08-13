@@ -1,14 +1,16 @@
 angular.module('mainApp', [])
     .controller("InitController", function($scope, $http) {
+        $scope.orderByName='name';
+
         var refresh = function() {
-            console.log('refresh');
             $http.get('/itemList').success(function(response){
                 $scope.itemList = response;
-                $scope.item = "";
+                $scope.item = {
+                    name:"", price:"0", qty:"0"
+                };
             });
         };
         refresh();
-
 
         $scope.addItem = function(){
             $http.post('/itemList', $scope.item).success(function(response){
@@ -25,8 +27,6 @@ angular.module('mainApp', [])
                 $scope.item = response;
             })
         };
-
-
         $scope.updateItem = function(){
             console.log('updateItem : '+$scope.item._id);
             console.log('updateItem : '+$scope.item);
@@ -34,9 +34,10 @@ angular.module('mainApp', [])
                 refresh();
             })
         };
-
         $scope.clearItem = function(){
-            $scope.item = "";
+            $scope.item = {
+                name:"", price:"0", qty:"0"
+            };
         };
 
 });

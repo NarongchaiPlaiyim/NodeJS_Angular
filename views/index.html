@@ -24,7 +24,11 @@
             <tbody>
                 <tr >
                     <td>
-                        <input type="text" ng-model="item.name" placeholder="Enter a name here"/>
+                        <input type="text"
+                               ng-model="item.name"
+                               autofocus="true"
+                               ng-required="true"
+                               placeholder="Enter a name here"/>
                     </td>
                     <td>
                         <input type="text" ng-model="item.price" placeholder="Enter a price here"/>
@@ -33,7 +37,7 @@
                         <input type="text" ng-model="item.qty" placeholder="Enter a qty here"/>
                     </td>
                     <td>
-                        {{item.price * item.qty}}
+                        <span ng-bind="item.price * item.qty | currency:'THB '" />
                     </td>
                     <td>
                         <button class="btn btn-primary" ng-click="addItem()">Add</button>
@@ -45,18 +49,29 @@
                         <button class="btn btn-success" ng-click="clearItem()">Clear</button>
                     </td>
                 </tr>
-                <tr ng-repeat = "item in itemList">
+                <tr>
+                    <td colspan="7">
+                        <input type="text" ng-model="filterBy.name" placeholder="Filter By name"/>
+                    </td>
+                </tr>
+                <tr >
+                    <td colspan="7" >
+                        <input type="radio" value="name" ng-model="orderByName" /> Sorted ASC
+                        <input type="radio" value="-name" ng-model="orderByName" /> Sorted DESC
+                    </td>
+                </tr>
+                <tr ng-repeat = "item in itemList | filter: filterBy | orderBy: orderByName">
                     <td>
-                        {{item.name}}
+                        <span ng-bind="item.name" />
                     </td>
                     <td>
-                        {{item.price}}
+                        <span ng-bind="item.price" />
                     </td>
                     <td>
-                        {{item.qty}}
+                        <span ng-bind="item.qty" />
                     </td>
                     <td>
-                        {{item.price * item.qty}}
+                        <span ng-bind="item.price * item.qty | currency:'THB '" />
                     </td>
                     <td>
                         <button class="btn btn-danger" ng-click="deleteItem(item._id)">Delete</button>
