@@ -7,9 +7,9 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-    <div class="container" ng-controller = "loginController">
-        <h1>Item list {{login}}</h1>
-    </div>
+    <!--<div class="container" ng-controller = "loginController">-->
+        <!--<h1>Test new moudle {{login}}</h1>-->
+    <!--</div>-->
     <div class="container" ng-controller = "InitController">
         <h1>Item list</h1>
         <table class="table">
@@ -34,10 +34,14 @@
                                placeholder="Enter a name here"/>
                     </td>
                     <td>
-                        <input type="text" ng-model="item.price" placeholder="Enter a price here"/>
+                        <input type="text"
+                               numbers-only
+                               ng-model="item.price" placeholder="Enter a price here"/>
                     </td>
                     <td>
-                        <input type="text" ng-model="item.qty" placeholder="Enter a qty here"/>
+                        <input type="text"
+                               numbers-only
+                               ng-model="item.qty" placeholder="Enter a qty here"/>
                     </td>
                     <td>
                         <span ng-bind="item.price * item.qty | currency:'THB '" />
@@ -79,7 +83,7 @@
                         <span ng-bind="item.price * item.qty | currency:'THB '" />
                     </td>
                     <td>
-                        <button class="btn btn-danger" ng-click="deleteItem(item._id)">Delete</button>
+                        <button class="btn btn-danger" ng-click="deleteItem(item._id, item.name)">Delete</button>
                     </td>
                     <td>
                         <button class="btn btn-warning" ng-click="selectItem(item._id)">Select</button>
