@@ -1,7 +1,5 @@
-angular.module('mainApp', [])
+angular.module('mainAppModule', ['loginModule'])
     .controller("InitController", function($scope, $http) {
-        $scope.orderByName='name';
-
         var refresh = function() {
             $http.get('/itemList').success(function(response){
                 $scope.itemList = response;
@@ -28,8 +26,6 @@ angular.module('mainApp', [])
             })
         };
         $scope.updateItem = function(){
-            console.log('updateItem : '+$scope.item._id);
-            console.log('updateItem : '+$scope.item);
             $http.put('/itemList/'+$scope.item._id, $scope.item).success(function(response){
                 refresh();
             })
@@ -39,5 +35,12 @@ angular.module('mainApp', [])
                 name:"", price:"0", qty:"0"
             };
         };
+    })
+    .controller("InitController2", function($scope, $http) {
 
-});
+    });
+
+angular.module('loginModule', [])
+    .controller("loginController", function($scope, $http) {
+        $scope.login='123456789';
+    });

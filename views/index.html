@@ -1,5 +1,5 @@
 <!DOCTYPE>
-<html ng-app = "mainApp">
+<html ng-app = "mainAppModule">
 <head>
     <script src="angular/angular.min.js"></script>
     <script src="controller/mainController.js"></script>
@@ -7,6 +7,9 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
+    <div class="container" ng-controller = "loginController">
+        <h1>Item list {{login}}</h1>
+    </div>
     <div class="container" ng-controller = "InitController">
         <h1>Item list</h1>
         <table class="table">
@@ -56,7 +59,9 @@
                 </tr>
                 <tr >
                     <td colspan="7" >
-                        <input type="radio" value="name" ng-model="orderByName" /> Sorted ASC
+                        <input type="radio" value="name"
+                               ng-model="orderByName"
+                               ng-init="orderByName='name'" /> Sorted ASC
                         <input type="radio" value="-name" ng-model="orderByName" /> Sorted DESC
                     </td>
                 </tr>
