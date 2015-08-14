@@ -1,4 +1,5 @@
-angular.module('mainAppModule', ['loginModule'])
+angular.module('mainAppModule', ['loginModule', 'utileModule.directives'])
+    //.directive('numbersOnly', ['utileModule.directives'])
     .controller("InitController", function($scope, $http) {
         var refresh = function() {
             $http.get('/itemList').success(function(response){
@@ -41,7 +42,7 @@ angular.module('mainAppModule', ['loginModule'])
     .controller("InitController2", function($scope, $http) {
 
     })
-    .directive('numbersOnly', function () {
+    .directive('numbersOnly333333', function () {
     return {
         require: 'ngModel',
         link: function (scope, element, attr, ngModelCtrl) {
